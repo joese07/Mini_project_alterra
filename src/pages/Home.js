@@ -1,8 +1,9 @@
 import GambarKasir from "./img/kasir.png";
 import "./assets/style.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
 import React from "react";
+import ListStruk from "./ListStruk";
 
 // const menuSatu = "Ayam Goreng";
 // const hargaSatu = 15000;
@@ -39,7 +40,7 @@ const menuMinuman = [
   {
     id: 1,
     nama: "jus mangga",
-    harga: 15000,
+    harga: 10000,
   },
   {
     id: 2,
@@ -58,17 +59,30 @@ const menuMinuman = [
   },
 ];
 
-function Home() {
+function Home(props) {
   const [count, setCount] = useState(0);
+  const [countSatu, setCountSatu] = useState(0);
   const [todos, setTodos] = useState([]);
   const [todoss, setTodoss] = useState([]);
-  const [toTotal, setTotal] = useState([]);
+  const [toTotal, setTotal] = useState(0);
 
   const [toSatuMakanan, setMakanan] = useState([]);
   const [toHargaMakanan, setHarga] = useState([]);
   const [totalHargaMenu, setTotalHarga] = useState([]);
   const [dataBayar, setDataBayar] = useState("");
   const [dataKembalian, setDataKembalian] = useState([]);
+  const [toTotalMakanan, setTotalMakanan] = useState(0);
+
+  const [menuAbakar, setMakanAbakar] = useState([]);
+  const [hargaAbakar, setHargaAbakar] = useState([]);
+
+  useEffect(() => {
+    setTotal(() => count * todoss);
+  }, [count]);
+
+  useEffect(() => {
+    setTotalMakanan(() => countSatu * toHargaMakanan);
+  }, [countSatu]);
 
   // const styles = StyleSheet.create({
   //   page: {
@@ -104,7 +118,9 @@ function Home() {
   };
 
   const totalHarga = () => {
-    setTotalHarga(() => [Number(toTotal) + Number(toHargaMakanan)]);
+    setTotalHarga(() => [
+      Number(toTotal) + Number(toTotalMakanan) + Number(hargaAbakar),
+    ]);
     setDataKembalian(() => [dataBayar - totalHargaMenu]);
   };
 
@@ -125,6 +141,8 @@ function Home() {
     const menuDua = menuMakanan.find((e) => e.id === 2);
     const makananDua = menuDua.nama;
     const makananHargaDua = menuDua.harga;
+    setMakanAbakar((t) => [makananDua]);
+    setHargaAbakar((t) => [makananHargaDua]);
     console.log(makananDua);
     console.log(makananHargaDua);
   };
@@ -147,17 +165,17 @@ function Home() {
     console.log(menuLima.harga);
   };
 
-  const increment = () => {
-    setCount(count + 1);
-    const totalHarga = count * todoss;
-    setTotal((e) => [totalHarga]);
-  };
+  // const increment = () => {
+  //   setCount(count + 1);
+  //   const totalHarga = count * todoss;
+  //   setTotal((e) => [totalHarga]);
+  // };
 
-  const incrementMin = () => {
-    setCount(count - 1);
-    const totalHarga = toTotal - todoss;
-    setTotal((e) => [totalHarga]);
-  };
+  // const incrementMin = () => {
+  //   setCount(count - 1);
+  //   const totalHarga = toTotal - todoss;
+  //   setTotal((e) => [totalHarga]);
+  // };
 
   // const totalHargaChange = () => {
   //   const totalHarga = count * todoss;
@@ -291,11 +309,15 @@ function Home() {
                           <span>{todoss}</span>
                         </td>
                         <td>
-                          <button onClick={incrementMin}>-</button>
+                          <button onClick={() => setCount((c) => c - 1)}>
+                            -
+                          </button>
                         </td>
                         <td>{count}</td>
                         <td>
-                          <button onClick={increment}>+</button>
+                          <button onClick={() => setCount((c) => c + 1)}>
+                            +
+                          </button>
                         </td>
                         <td>{toTotal}</td>
                       </tr>
@@ -303,62 +325,34 @@ function Home() {
                         <td>{toSatuMakanan}</td>
                         <td>{toHargaMakanan}</td>
                         <td>
-                          <button>-</button>
+                          <button onClick={() => setCountSatu((c) => c - 1)}>
+                            -
+                          </button>
                         </td>
-                        <td>1</td>
+                        <td>{countSatu}</td>
                         <td>
-                          <button>+</button>
+                          <button onClick={() => setCountSatu((c) => c + 1)}>
+                            +
+                          </button>
                         </td>
-                        <td>{toHargaMakanan}</td>
+                        <td>{toTotalMakanan}</td>
                       </tr>
-                      {/* <tr>
-                        <td>kangkung</td>
-                        <td>25.000</td>
+                      <tr>
+                        <td>{menuAbakar}</td>
+                        <td>{hargaAbakar}</td>
                         <td>
-                          <button>-</button>
+                          <button onClick={() => setCountSatu((c) => c - 1)}>
+                            -
+                          </button>
                         </td>
-                        <td></td>
+                        <td>{countSatu}</td>
                         <td>
-                          <button>+</button>
+                          <button onClick={() => setCountSatu((c) => c + 1)}>
+                            +
+                          </button>
                         </td>
-                        <td>75.000</td>
-                      </tr> */}
-                      {/* <tr>
-                        <td>tempe</td>
-                        <td>4.000</td>
-                        <td>
-                          <button>-</button>
-                        </td>
-                        <td>0</td>
-                        <td>
-                          <button>+</button>
-                        </td>
-                        <td>20.000</td>
-                      </tr> */}
-                      {/* <tr>
-                        <td>tahu</td>
-                        <td>4.0000</td>
-                        <td>
-                          <button>-</button>
-                        </td>
-                        <td>0</td>
-                        <td>
-                          <button>+</button>
-                        </td>
-                        <td>20.000</td>
-                      </tr> */}
-                      {/* <tr>
-                        <td>Es teh Manis</td>
-                        <td>5.000</td>
-                        <td>
-                          <button>-</button>
-                        </td>
-                        <td>0</td>
-                        <td>
-                          <button>+</button>
-                        </td>
-                        <td>25.000</td>
-                      </tr> */}
+                        <td>{hargaAbakar}</td>
+                      </tr>
                       <tr>
                         <td>
                           <strong>Total</strong>
@@ -390,7 +384,7 @@ function Home() {
                         <td>{dataKembalian}</td>
                       </tr>
                     </tbody>
-                    {/* <ListStruk /> */}
+                    {/* <ListStruk data={todos} name={todoss} /> */}
                   </table>
                   <div className="row">
                     <div class="col">
@@ -416,7 +410,9 @@ function Home() {
                       </Popup>
                     </div>
                     <div class="col">
-                      <div class="p-3 border bg-light">Print</div>
+                      <button>
+                        <div class="p-3 border bg-light">Print</div>
+                      </button>
                     </div>
                   </div>
                 </div>

@@ -1,9 +1,9 @@
-const ListStruk = ({ menuSatu }) => {
+function ListStruk(props) {
   return (
     <tbody>
       <tr>
-        <td>{menuSatu}</td>
-        <td>15000</td>
+        <td>{props.data}</td>
+        <td>{props.name}</td>
         <td>
           <button>-</button>
         </td>
@@ -11,7 +11,7 @@ const ListStruk = ({ menuSatu }) => {
         <td>
           <button>+</button>
         </td>
-        <td>75.000</td>
+        <td>{props.nama}</td>
       </tr>
       <tr>
         <td>nasi </td>
@@ -105,6 +105,6 @@ const ListStruk = ({ menuSatu }) => {
       </tr>
     </tbody>
   );
-};
+}
 
 export default ListStruk;
