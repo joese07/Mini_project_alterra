@@ -204,7 +204,10 @@ function Home(props) {
       <div className="overflow-hidden jarak-kiri">
         <div className="row gx-5">
           <div className="col">
-            <div className="p-3 border bg-light">MENU MAKANAN</div>
+            <div className="p-3 border bg-danger bg-opacity-75">
+              MENU MAKANAN
+            </div>
+
             <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 mt-3">
               <div class="col">
                 <button class="p-3 border bg-light" onClick={handleMenuMakan}>
@@ -234,7 +237,9 @@ function Home(props) {
             </div>
           </div>
           <div className="col">
-            <div className="p-3 border bg-light">MENU MINUMAN</div>
+            <div className="p-3 border bg-primary bg-opacity-75">
+              MENU MINUMAN
+            </div>
             <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 mt-3">
               <div class="col">
                 <button class="p-3 border bg-light" onClick={handleMenuMinum}>
