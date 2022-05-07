@@ -61,7 +61,7 @@ const menuMinuman = [
 
 function Home(props) {
   const [count, setCount] = useState(0);
-  const [countSatu, setCountSatu] = useState(0);
+
   const [todos, setTodos] = useState([]);
   const [todoss, setTodoss] = useState([]);
   const [toTotal, setTotal] = useState(0);
@@ -77,35 +77,76 @@ function Home(props) {
   const [hargaAbakar, setHargaAbakar] = useState([]);
 
   const [airMineral, setAirMineral] = useState([]);
+  const [hargaAirmineral, setHargaMineral] = useState([]);
+  const [totalHargaAirmineral, setTotalAirmineral] = useState([]);
+  const [countAirmineral, setCountAirmineral] = useState(0);
+
   const [tehHangat, setTehhangat] = useState([]);
+  const [hargaTehhangat, setHargaTeh] = useState([]);
+  const [totalHargaTehhangat, setTotalTehhangat] = useState([]);
+  const [countTeh, setCountTeh] = useState(0);
+
   const [esJeruk, setEsjeruk] = useState([]);
+  const [hargaEsjeruk, setHargaesjeruk] = useState([]);
+  const [totalHargaEsjeruk, setTotalEsjeruk] = useState([]);
+  const [countEsjeruk, setCountEsjeruk] = useState(0);
+
+  const [jusMangga, setJusmangga] = useState([]);
+  const [hargaJusmangga, setHargajusmangga] = useState([]);
+  const [totalHargaJusmangga, setTotalJusmangga] = useState([]);
+  const [countJusmangga, setCountJusmangga] = useState(0);
 
   useEffect(() => {
     setTotal(() => count * todoss);
   }, [count]);
 
-  useEffect(() => {
-    setTotalMakanan(() => countSatu * toHargaMakanan);
-  }, [countSatu]);
-
   const handelAirmineral = () => {
     const menuAirmineral = menuMinuman.find((e) => e.id === 2);
     const minumanAirmineral = menuAirmineral.nama;
-    // const minumanHargaAirmineral = menuAirmineral.harga;
+    const minumanHargaAirmineral = menuAirmineral.harga;
     setAirMineral((t) => [...t, minumanAirmineral]);
+    setHargaMineral((t) => [minumanHargaAirmineral]);
   };
+
+  useEffect(() => {
+    setTotalAirmineral(() => countAirmineral * hargaAirmineral);
+  }, [countAirmineral]);
 
   const handleTehhangat = () => {
     const menuTehhangat = menuMinuman.find((e) => e.id === 3);
     const minumanTehhangat = menuTehhangat.nama;
+    const minumanHargaTehhangat = menuTehhangat.harga;
     setTehhangat((t) => [...t, minumanTehhangat]);
+    setHargaTeh((t) => [minumanHargaTehhangat]);
   };
+
+  useEffect(() => {
+    setTotalTehhangat(() => countTeh * hargaTehhangat);
+  }, [countTeh]);
 
   const handleEsjeruk = () => {
     const menuEsjeruk = menuMinuman.find((e) => e.id === 4);
     const minumanEsjeruk = menuEsjeruk.nama;
+    const minumanHargaEsjeruk = menuEsjeruk.harga;
     setEsjeruk((t) => [...t, minumanEsjeruk]);
+    setHargaesjeruk((t) => [minumanHargaEsjeruk]);
   };
+
+  useEffect(() => {
+    setTotalEsjeruk(() => countEsjeruk * hargaEsjeruk);
+  }, [countEsjeruk]);
+
+  const handleJusMangga = () => {
+    const menuJusmangga = menuMinuman.find((e) => e.id === 1);
+    const minumanJusmangga = menuJusmangga.nama;
+    const minumanHargaJusmangga = menuJusmangga.harga;
+    setJusmangga((t) => [...t, minumanJusmangga]);
+    setHargajusmangga((t) => [minumanHargaJusmangga]);
+  };
+
+  useEffect(() => {
+    setTotalJusmangga(() => countJusmangga * hargaJusmangga);
+  }, [countJusmangga]);
   // const styles = StyleSheet.create({
   //   page: {
   //     flexDirection: "row",
@@ -141,7 +182,10 @@ function Home(props) {
 
   const totalHarga = () => {
     setTotalHarga(() => [
-      Number(toTotal) + Number(toTotalMakanan) + Number(hargaAbakar),
+      Number(totalHargaAirmineral) +
+        Number(totalHargaTehhangat) +
+        Number(totalHargaEsjeruk) +
+        Number(totalHargaJusmangga),
     ]);
     setDataKembalian(() => [dataBayar - totalHargaMenu]);
   };
@@ -264,7 +308,7 @@ function Home(props) {
             </div>
             <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 mt-3">
               <div class="col">
-                <button class="p-3 border bg-light" onClick={handleMenuMinum}>
+                <button class="p-3 border bg-light" onClick={handleJusMangga}>
                   Jus Mangga
                 </button>
               </div>
@@ -334,56 +378,52 @@ function Home(props) {
                       <th scope="col">Total</th>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>
-                          <span>{todos}</span>
-                        </td>
-                        <td>
-                          <span>{todoss}</span>
-                        </td>
-                        <td>
-                          <button onClick={() => setCount((c) => c - 1)}>
-                            -
-                          </button>
-                        </td>
-                        <td>{count}</td>
-                        <td>
-                          <button onClick={() => setCount((c) => c + 1)}>
-                            +
-                          </button>
-                        </td>
-                        <td>{toTotal}</td>
-                      </tr>
-                      <tr>
-                        <td>{toSatuMakanan}</td>
-                        <td>{toHargaMakanan}</td>
-                        <td>
-                          <button onClick={() => setCountSatu((c) => c - 1)}>
-                            -
-                          </button>
-                        </td>
-                        <td>{countSatu}</td>
-                        <td>
-                          <button onClick={() => setCountSatu((c) => c + 1)}>
-                            +
-                          </button>
-                        </td>
-                        <td>{toTotalMakanan}</td>
-                      </tr>
+                      {jusMangga.map((todo) => {
+                        return (
+                          <tr>
+                            <td>{todo}</td>
+                            <td>{hargaJusmangga}</td>
+                            <td>
+                              <button
+                                onClick={() => setCountJusmangga((c) => c - 1)}
+                              >
+                                -
+                              </button>
+                            </td>
+                            <td>{countJusmangga}</td>
+                            <td>
+                              <button
+                                onClick={() => setCountJusmangga((c) => c + 1)}
+                              >
+                                +
+                              </button>
+                            </td>
+                            <td>{totalHargaJusmangga}</td>
+                          </tr>
+                        );
+                      })}
 
                       {airMineral.map((todo) => {
                         return (
                           <tr>
                             <td>{todo}</td>
-                            <td>{hargaAbakar}</td>
+                            <td>{hargaAirmineral}</td>
                             <td>
-                              <button>-</button>
+                              <button
+                                onClick={() => setCountAirmineral((c) => c - 1)}
+                              >
+                                -
+                              </button>
                             </td>
-                            <td>{countSatu}</td>
+                            <td>{countAirmineral}</td>
                             <td>
-                              <button>+</button>
+                              <button
+                                onClick={() => setCountAirmineral((c) => c + 1)}
+                              >
+                                +
+                              </button>
                             </td>
-                            <td>{hargaAbakar}</td>
+                            <td>{totalHargaAirmineral}</td>
                           </tr>
                         );
                       })}
@@ -392,15 +432,19 @@ function Home(props) {
                         return (
                           <tr>
                             <td>{todo}</td>
-                            <td>{hargaAbakar}</td>
+                            <td>{hargaTehhangat}</td>
                             <td>
-                              <button>-</button>
+                              <button onClick={() => setCountTeh((c) => c - 1)}>
+                                -
+                              </button>
                             </td>
-                            <td>{countSatu}</td>
+                            <td>{countTeh}</td>
                             <td>
-                              <button>+</button>
+                              <button onClick={() => setCountTeh((c) => c + 1)}>
+                                +
+                              </button>
                             </td>
-                            <td>{hargaAbakar}</td>
+                            <td>{totalHargaTehhangat}</td>
                           </tr>
                         );
                       })}
@@ -409,15 +453,23 @@ function Home(props) {
                         return (
                           <tr>
                             <td>{todo}</td>
-                            <td>{hargaAbakar}</td>
+                            <td>{hargaEsjeruk}</td>
                             <td>
-                              <button>-</button>
+                              <button
+                                onClick={() => setCountEsjeruk((c) => c - 1)}
+                              >
+                                -
+                              </button>
                             </td>
-                            <td>{countSatu}</td>
+                            <td>{countEsjeruk}</td>
                             <td>
-                              <button>+</button>
+                              <button
+                                onClick={() => setCountEsjeruk((c) => c + 1)}
+                              >
+                                +
+                              </button>
                             </td>
-                            <td>{hargaAbakar}</td>
+                            <td>{totalHargaEsjeruk}</td>
                           </tr>
                         );
                       })}
