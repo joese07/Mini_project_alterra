@@ -44,7 +44,7 @@ const menuMinuman = [
   },
   {
     id: 2,
-    nama: "teh manis",
+    nama: "air mineral",
     harga: 5000,
   },
   {
@@ -76,6 +76,10 @@ function Home(props) {
   const [menuAbakar, setMakanAbakar] = useState([]);
   const [hargaAbakar, setHargaAbakar] = useState([]);
 
+  const [airMineral, setAirMineral] = useState([]);
+  const [tehHangat, setTehhangat] = useState([]);
+  const [esJeruk, setEsjeruk] = useState([]);
+
   useEffect(() => {
     setTotal(() => count * todoss);
   }, [count]);
@@ -84,6 +88,24 @@ function Home(props) {
     setTotalMakanan(() => countSatu * toHargaMakanan);
   }, [countSatu]);
 
+  const handelAirmineral = () => {
+    const menuAirmineral = menuMinuman.find((e) => e.id === 2);
+    const minumanAirmineral = menuAirmineral.nama;
+    // const minumanHargaAirmineral = menuAirmineral.harga;
+    setAirMineral((t) => [...t, minumanAirmineral]);
+  };
+
+  const handleTehhangat = () => {
+    const menuTehhangat = menuMinuman.find((e) => e.id === 3);
+    const minumanTehhangat = menuTehhangat.nama;
+    setTehhangat((t) => [...t, minumanTehhangat]);
+  };
+
+  const handleEsjeruk = () => {
+    const menuEsjeruk = menuMinuman.find((e) => e.id === 3);
+    const minumanEsjeruk = menuEsjeruk.nama;
+    setEsjeruk((t) => [...t, minumanEsjeruk]);
+  };
   // const styles = StyleSheet.create({
   //   page: {
   //     flexDirection: "row",
@@ -243,17 +265,23 @@ function Home(props) {
             <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 mt-3">
               <div class="col">
                 <button class="p-3 border bg-light" onClick={handleMenuMinum}>
-                  Add Todo
+                  Jus Mangga
                 </button>
               </div>
               <div class="col">
-                <div class="p-3 border bg-light">Menu 2</div>
+                <button class="p-3 border bg-light" onClick={handelAirmineral}>
+                  Air Mineral
+                </button>
               </div>
               <div class="col">
-                <div class="p-3 border bg-light">Menu 3</div>
+                <div class="p-3 border bg-light" onClick={handleTehhangat}>
+                  Teh Hangat
+                </div>
               </div>
               <div class="col">
-                <div class="p-3 border bg-light">Menu 4</div>
+                <div class="p-3 border bg-light" onClick={handleEsjeruk}>
+                  Es Jeruk
+                </div>
               </div>
               <div class="col">
                 <div class="p-3 border bg-light">Menu 5</div>
@@ -342,22 +370,41 @@ function Home(props) {
                         </td>
                         <td>{toTotalMakanan}</td>
                       </tr>
-                      <tr>
-                        <td>{menuAbakar}</td>
-                        <td>{hargaAbakar}</td>
-                        <td>
-                          <button onClick={() => setCountSatu((c) => c - 1)}>
-                            -
-                          </button>
-                        </td>
-                        <td>{countSatu}</td>
-                        <td>
-                          <button onClick={() => setCountSatu((c) => c + 1)}>
-                            +
-                          </button>
-                        </td>
-                        <td>{hargaAbakar}</td>
-                      </tr>
+
+                      {airMineral.map((todo) => {
+                        return (
+                          <tr>
+                            <td>{todo}</td>
+                            <td>{hargaAbakar}</td>
+                            <td>
+                              <button>-</button>
+                            </td>
+                            <td>{countSatu}</td>
+                            <td>
+                              <button>+</button>
+                            </td>
+                            <td>{hargaAbakar}</td>
+                          </tr>
+                        );
+                      })}
+
+                      {tehHangat.map((todo) => {
+                        return (
+                          <tr>
+                            <td>{todo}</td>
+                            <td>{hargaAbakar}</td>
+                            <td>
+                              <button>-</button>
+                            </td>
+                            <td>{countSatu}</td>
+                            <td>
+                              <button>+</button>
+                            </td>
+                            <td>{hargaAbakar}</td>
+                          </tr>
+                        );
+                      })}
+
                       <tr>
                         <td>
                           <strong>Total</strong>
