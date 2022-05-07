@@ -201,7 +201,9 @@ function Home(props) {
         Number(totalHargaTehhangat) +
         Number(totalHargaEsjeruk) +
         Number(totalHargaJusmangga) +
-        Number(totalHargaAyamGoreng),
+        Number(totalHargaAyamGoreng) +
+        Number(totalHargaAyamBakar) +
+        Number(totalHargaAyamKalasan),
     ]);
     setDataKembalian(() => [dataBayar - totalHargaMenu]);
   };
@@ -211,6 +213,7 @@ function Home(props) {
     console.log(" Input nominal ", dataBayar);
   };
 
+  console.log(ayamGoreng + totalHargaAyamGoreng);
   return (
     <div>
       <nav className="navbar navbar-light bg-light">
