@@ -50,7 +50,7 @@ const menuMinuman = [
   {
     id: 3,
     nama: "teh hangat",
-    harga: 25000,
+    harga: 4000,
   },
   {
     id: 4,
@@ -102,7 +102,7 @@ function Home(props) {
   };
 
   const handleEsjeruk = () => {
-    const menuEsjeruk = menuMinuman.find((e) => e.id === 3);
+    const menuEsjeruk = menuMinuman.find((e) => e.id === 4);
     const minumanEsjeruk = menuEsjeruk.nama;
     setEsjeruk((t) => [...t, minumanEsjeruk]);
   };
@@ -274,16 +274,16 @@ function Home(props) {
                 </button>
               </div>
               <div class="col">
-                <div class="p-3 border bg-light" onClick={handleTehhangat}>
+                <button class="p-3 border bg-light" onClick={handleTehhangat}>
                   Teh Hangat
-                </div>
+                </button>
               </div>
               <div class="col">
-                <div class="p-3 border bg-light" onClick={handleEsjeruk}>
+                <button class="p-3 border bg-light" onClick={handleEsjeruk}>
                   Es Jeruk
-                </div>
+                </button>
               </div>
-              <div class="col">
+              {/* <div class="col">
                 <div class="p-3 border bg-light">Menu 5</div>
               </div>
               <div class="col">
@@ -315,7 +315,7 @@ function Home(props) {
               </div>
               <div class="col">
                 <div class="p-3 border bg-light">Menu 5</div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="col jarak-kanan">
@@ -389,6 +389,23 @@ function Home(props) {
                       })}
 
                       {tehHangat.map((todo) => {
+                        return (
+                          <tr>
+                            <td>{todo}</td>
+                            <td>{hargaAbakar}</td>
+                            <td>
+                              <button>-</button>
+                            </td>
+                            <td>{countSatu}</td>
+                            <td>
+                              <button>+</button>
+                            </td>
+                            <td>{hargaAbakar}</td>
+                          </tr>
+                        );
+                      })}
+
+                      {esJeruk.map((todo) => {
                         return (
                           <tr>
                             <td>{todo}</td>
