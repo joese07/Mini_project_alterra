@@ -60,51 +60,46 @@ const menuMinuman = [
 ];
 
 function Home(props) {
-  const [count, setCount] = useState(0);
-
-  const [todos, setTodos] = useState([]);
-  const [todoss, setTodoss] = useState([]);
-  const [toTotal, setTotal] = useState(0);
-
-  const [toSatuMakanan, setMakanan] = useState([]);
-  const [toHargaMakanan, setHarga] = useState([]);
+  // session total bayar dan kembalian
   const [totalHargaMenu, setTotalHarga] = useState([]);
   const [dataBayar, setDataBayar] = useState("");
   const [dataKembalian, setDataKembalian] = useState([]);
-  const [toTotalMakanan, setTotalMakanan] = useState(0);
 
-  const [menuAbakar, setMakanAbakar] = useState([]);
-  const [hargaAbakar, setHargaAbakar] = useState([]);
-
+  // session menu minuman air mineral
   const [airMineral, setAirMineral] = useState([]);
   const [hargaAirmineral, setHargaMineral] = useState([]);
   const [totalHargaAirmineral, setTotalAirmineral] = useState([]);
   const [countAirmineral, setCountAirmineral] = useState(0);
 
+  // session menu minuman teh hangat
   const [tehHangat, setTehhangat] = useState([]);
   const [hargaTehhangat, setHargaTeh] = useState([]);
   const [totalHargaTehhangat, setTotalTehhangat] = useState([]);
   const [countTeh, setCountTeh] = useState(0);
 
+  // session menu minuman esjeruk
   const [esJeruk, setEsjeruk] = useState([]);
   const [hargaEsjeruk, setHargaesjeruk] = useState([]);
   const [totalHargaEsjeruk, setTotalEsjeruk] = useState([]);
   const [countEsjeruk, setCountEsjeruk] = useState(0);
 
+  // session menu minuman jusmangga
   const [jusMangga, setJusmangga] = useState([]);
   const [hargaJusmangga, setHargajusmangga] = useState([]);
   const [totalHargaJusmangga, setTotalJusmangga] = useState([]);
   const [countJusmangga, setCountJusmangga] = useState(0);
 
-  useEffect(() => {
-    setTotal(() => count * todoss);
-  }, [count]);
+  //session menu makanan ayamgoreng
+  const [ayamGoreng, setAyamGoreng] = useState([]);
+  const [hargaAyamGoreng, setHargaAyamGoreng] = useState([]);
+  const [totalHargaAyamGoreng, setTotalAyamGoreng] = useState([]);
+  const [countAyamGoreng, setCountAyamGoreng] = useState(0);
 
   const handelAirmineral = () => {
     const menuAirmineral = menuMinuman.find((e) => e.id === 2);
     const minumanAirmineral = menuAirmineral.nama;
     const minumanHargaAirmineral = menuAirmineral.harga;
-    setAirMineral((t) => [...t, minumanAirmineral]);
+    setAirMineral((t) => [minumanAirmineral]);
     setHargaMineral((t) => [minumanHargaAirmineral]);
   };
 
@@ -116,7 +111,7 @@ function Home(props) {
     const menuTehhangat = menuMinuman.find((e) => e.id === 3);
     const minumanTehhangat = menuTehhangat.nama;
     const minumanHargaTehhangat = menuTehhangat.harga;
-    setTehhangat((t) => [...t, minumanTehhangat]);
+    setTehhangat((t) => [minumanTehhangat]);
     setHargaTeh((t) => [minumanHargaTehhangat]);
   };
 
@@ -128,7 +123,7 @@ function Home(props) {
     const menuEsjeruk = menuMinuman.find((e) => e.id === 4);
     const minumanEsjeruk = menuEsjeruk.nama;
     const minumanHargaEsjeruk = menuEsjeruk.harga;
-    setEsjeruk((t) => [...t, minumanEsjeruk]);
+    setEsjeruk((t) => [minumanEsjeruk]);
     setHargaesjeruk((t) => [minumanHargaEsjeruk]);
   };
 
@@ -140,52 +135,41 @@ function Home(props) {
     const menuJusmangga = menuMinuman.find((e) => e.id === 1);
     const minumanJusmangga = menuJusmangga.nama;
     const minumanHargaJusmangga = menuJusmangga.harga;
-    setJusmangga((t) => [...t, minumanJusmangga]);
+    setJusmangga((t) => [minumanJusmangga]);
     setHargajusmangga((t) => [minumanHargaJusmangga]);
   };
 
   useEffect(() => {
     setTotalJusmangga(() => countJusmangga * hargaJusmangga);
   }, [countJusmangga]);
-  // const styles = StyleSheet.create({
-  //   page: {
-  //     flexDirection: "row",
-  //     backgroundColor: "#E4E4E4",
-  //   },
-  //   section: {
-  //     margin: 10,
-  //     padding: 10,
-  //     flexGrow: 1,
-  //   },
-  // });
 
-  // const MyDocument = () => (
-  //   <Document>
-  //     <Page size="A4" style={styles.page}>
-  //       <View style={styles.section}>
-  //         <Text>Section #1</Text>
-  //       </View>
-  //       <View style={styles.section}>
-  //         <Text>Section #2</Text>
-  //       </View>
-  //     </Page>
-  //   </Document>
-  // );
-
-  const handleMenuMinum = () => {
-    const menuSatu = menuMinuman.find((e) => e.id === 1);
-    const minumanSatu = menuSatu.nama;
-    const minumanHargaSatu = menuSatu.harga;
-    setTodos(() => [minumanSatu]);
-    setTodoss(() => [minumanHargaSatu]);
+  const handleAyamGoreng = () => {
+    const menuAyamGoreng = menuMakanan.find((e) => e.id === 1);
+    const makananAyamGoreng = menuAyamGoreng.nama;
+    const makananHargaAyamGoreng = menuAyamGoreng.harga;
+    setAyamGoreng((t) => [makananAyamGoreng]);
+    setHargaAyamGoreng((t) => [makananHargaAyamGoreng]);
   };
+
+  useEffect(() => {
+    setTotalAyamGoreng(() => countAyamGoreng * hargaAyamGoreng);
+  }, [countAyamGoreng]);
+
+  const handleAyamBakar = () => {};
+
+  const handleAyamKalasan = () => {};
+
+  const handleAyamGeprek = () => {};
+
+  const handleAyamRicaRica = () => {};
 
   const totalHarga = () => {
     setTotalHarga(() => [
       Number(totalHargaAirmineral) +
         Number(totalHargaTehhangat) +
         Number(totalHargaEsjeruk) +
-        Number(totalHargaJusmangga),
+        Number(totalHargaJusmangga) +
+        Number(totalHargaAyamGoreng),
     ]);
     setDataKembalian(() => [dataBayar - totalHargaMenu]);
   };
@@ -194,62 +178,6 @@ function Home(props) {
     setDataBayar(e.target.value);
     console.log(" Input nominal ", dataBayar);
   };
-
-  const handleMenuMakan = () => {
-    const menuSatu = menuMakanan.find((e) => e.id === 1);
-    const makananSatu = menuSatu.nama;
-    const makananHargaSatu = menuSatu.harga;
-    setMakanan(() => [makananSatu]);
-    setHarga(() => [makananHargaSatu]);
-  };
-
-  const handleMenuDua = () => {
-    const menuDua = menuMakanan.find((e) => e.id === 2);
-    const makananDua = menuDua.nama;
-    const makananHargaDua = menuDua.harga;
-    setMakanAbakar((t) => [makananDua]);
-    setHargaAbakar((t) => [makananHargaDua]);
-    console.log(makananDua);
-    console.log(makananHargaDua);
-  };
-
-  const handleMenuTiga = () => {
-    const menuTiga = menuMakanan.find((e) => e.id === 3);
-    console.log(menuTiga.nama);
-    console.log(menuTiga.harga);
-  };
-
-  const handleMenuEmpat = () => {
-    const menuEmpat = menuMakanan.find((e) => e.id === 4);
-    console.log(menuEmpat.nama);
-    console.log(menuEmpat.harga);
-  };
-
-  const handleMenuLima = () => {
-    const menuLima = menuMakanan.find((e) => e.id === 5);
-    console.log(menuLima.nama);
-    console.log(menuLima.harga);
-  };
-
-  // const increment = () => {
-  //   setCount(count + 1);
-  //   const totalHarga = count * todoss;
-  //   setTotal((e) => [totalHarga]);
-  // };
-
-  // const incrementMin = () => {
-  //   setCount(count - 1);
-  //   const totalHarga = toTotal - todoss;
-  //   setTotal((e) => [totalHarga]);
-  // };
-
-  // const totalHargaChange = () => {
-  //   const totalHarga = count * todoss;
-  //   setTotal((e) => [totalHarga]);
-  // };
-
-  // console.log(count);
-  // console.log(toTotal);
 
   return (
     <div>
@@ -276,27 +204,30 @@ function Home(props) {
 
             <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 mt-3">
               <div class="col">
-                <button class="p-3 border bg-light" onClick={handleMenuMakan}>
+                <button class="p-3 border bg-light" onClick={handleAyamGoreng}>
                   Ayam Goreng
                 </button>
               </div>
               <div class="col">
-                <button class="p-3 border bg-light" onClick={handleMenuDua}>
+                <button class="p-3 border bg-light" onClick={handleAyamBakar}>
                   Ayam Bakar
                 </button>
               </div>
               <div class="col">
-                <button class="p-3 border bg-light" onClick={handleMenuTiga}>
+                <button class="p-3 border bg-light" onClick={handleAyamKalasan}>
                   Ayam Kalasan
                 </button>
               </div>
               <div class="col">
-                <button class="p-3 border bg-light" onClick={handleMenuEmpat}>
+                <button class="p-3 border bg-light" onClick={handleAyamGeprek}>
                   Ayam Geprek
                 </button>
               </div>
               <div class="col">
-                <button class="p-3 border bg-light" onClick={handleMenuLima}>
+                <button
+                  class="p-3 border bg-light"
+                  onClick={handleAyamRicaRica}
+                >
                   Ayam Rica Rica
                 </button>
               </div>
@@ -327,39 +258,6 @@ function Home(props) {
                   Es Jeruk
                 </button>
               </div>
-              {/* <div class="col">
-                <div class="p-3 border bg-light">Menu 5</div>
-              </div>
-              <div class="col">
-                <div class="p-3 border bg-light">Menu 6</div>
-              </div>
-              <div class="col">
-                <div class="p-3 border bg-light">Menu 7</div>
-              </div>
-              <div class="col">
-                <div class="p-3 border bg-light">Menu 8</div>
-              </div>
-              <div class="col">
-                <div class="p-3 border bg-light">Menu 9</div>
-              </div>
-              <div class="col">
-                <div class="p-3 border bg-light">Menu 10</div>
-              </div>
-              <div class="col">
-                <div class="p-3 border bg-light">Menu 1</div>
-              </div>
-              <div class="col">
-                <div class="p-3 border bg-light">Menu 2</div>
-              </div>
-              <div class="col">
-                <div class="p-3 border bg-light">Menu 3</div>
-              </div>
-              <div class="col">
-                <div class="p-3 border bg-light">Menu 4</div>
-              </div>
-              <div class="col">
-                <div class="p-3 border bg-light">Menu 5</div>
-              </div> */}
             </div>
           </div>
           <div className="col jarak-kanan">
@@ -378,6 +276,31 @@ function Home(props) {
                       <th scope="col">Total</th>
                     </thead>
                     <tbody>
+                      {ayamGoreng.map((todo) => {
+                        return (
+                          <tr>
+                            <td>{todo}</td>
+                            <td>{hargaAyamGoreng}</td>
+                            <td>
+                              <button
+                                onClick={() => setCountAyamGoreng((c) => c - 1)}
+                              >
+                                -
+                              </button>
+                            </td>
+                            <td>{countAyamGoreng}</td>
+                            <td>
+                              <button
+                                onClick={() => setCountAyamGoreng((c) => c + 1)}
+                              >
+                                +
+                              </button>
+                            </td>
+                            <td>{totalHargaAyamGoreng}</td>
+                          </tr>
+                        );
+                      })}
+                      {/* session minuman */}
                       {jusMangga.map((todo) => {
                         return (
                           <tr>
