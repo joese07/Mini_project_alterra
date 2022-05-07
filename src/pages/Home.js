@@ -95,6 +95,18 @@ function Home(props) {
   const [totalHargaAyamGoreng, setTotalAyamGoreng] = useState([]);
   const [countAyamGoreng, setCountAyamGoreng] = useState(0);
 
+  //session menu makanan ayambakar
+  const [ayamBakar, setAyamBakar] = useState([]);
+  const [hargaAyamBakar, setHargaAyamBakar] = useState([]);
+  const [totalHargaAyamBakar, setTotalAyamBakar] = useState([]);
+  const [countAyamBakar, setCountAyamBakar] = useState(0);
+
+  //session menu makanan ayamkalasan
+  const [ayamKalasan, setAyamKalasan] = useState([]);
+  const [hargaAyamKalasan, setHargaAyamKalasan] = useState([]);
+  const [totalHargaAyamKalasan, setTotalAyamKalasan] = useState([]);
+  const [countAyamKalasan, setCountAyamKalasan] = useState(0);
+
   const handelAirmineral = () => {
     const menuAirmineral = menuMinuman.find((e) => e.id === 2);
     const minumanAirmineral = menuAirmineral.nama;
@@ -155,9 +167,29 @@ function Home(props) {
     setTotalAyamGoreng(() => countAyamGoreng * hargaAyamGoreng);
   }, [countAyamGoreng]);
 
-  const handleAyamBakar = () => {};
+  const handleAyamBakar = () => {
+    const menuAyamBakar = menuMakanan.find((e) => e.id === 2);
+    const makananAyamBakar = menuAyamBakar.nama;
+    const makananHargaAyamBakar = menuAyamBakar.harga;
+    setAyamBakar((t) => [makananAyamBakar]);
+    setHargaAyamBakar((t) => [makananHargaAyamBakar]);
+  };
 
-  const handleAyamKalasan = () => {};
+  useEffect(() => {
+    setTotalAyamBakar(() => countAyamBakar * hargaAyamBakar);
+  }, [countAyamBakar]);
+
+  const handleAyamKalasan = () => {
+    const menuAyamKalasan = menuMakanan.find((e) => e.id === 3);
+    const makananAyamKalasan = menuAyamKalasan.nama;
+    const makananHargaAyamKalasan = menuAyamKalasan.harga;
+    setAyamKalasan((t) => [makananAyamKalasan]);
+    setHargaAyamKalasan((t) => [makananHargaAyamKalasan]);
+  };
+
+  useEffect(() => {
+    setTotalAyamKalasan(() => countAyamKalasan * hargaAyamKalasan);
+  }, [countAyamKalasan]);
 
   const handleAyamGeprek = () => {};
 
@@ -276,6 +308,58 @@ function Home(props) {
                       <th scope="col">Total</th>
                     </thead>
                     <tbody>
+                      {ayamKalasan.map((todo) => {
+                        return (
+                          <tr>
+                            <td>{todo}</td>
+                            <td>{hargaAyamKalasan}</td>
+                            <td>
+                              <button
+                                onClick={() =>
+                                  setCountAyamKalasan((c) => c - 1)
+                                }
+                              >
+                                -
+                              </button>
+                            </td>
+                            <td>{countAyamKalasan}</td>
+                            <td>
+                              <button
+                                onClick={() =>
+                                  setCountAyamKalasan((c) => c + 1)
+                                }
+                              >
+                                +
+                              </button>
+                            </td>
+                            <td>{totalHargaAyamKalasan}</td>
+                          </tr>
+                        );
+                      })}
+                      {ayamBakar.map((todo) => {
+                        return (
+                          <tr>
+                            <td>{todo}</td>
+                            <td>{hargaAyamBakar}</td>
+                            <td>
+                              <button
+                                onClick={() => setCountAyamBakar((c) => c - 1)}
+                              >
+                                -
+                              </button>
+                            </td>
+                            <td>{countAyamBakar}</td>
+                            <td>
+                              <button
+                                onClick={() => setCountAyamBakar((c) => c + 1)}
+                              >
+                                +
+                              </button>
+                            </td>
+                            <td>{totalHargaAyamBakar}</td>
+                          </tr>
+                        );
+                      })}
                       {ayamGoreng.map((todo) => {
                         return (
                           <tr>
