@@ -107,6 +107,18 @@ function Home(props) {
   const [totalHargaAyamKalasan, setTotalAyamKalasan] = useState([]);
   const [countAyamKalasan, setCountAyamKalasan] = useState(0);
 
+  //session menu makanan ayamgeprek
+  const [ayamGeprek, setAyamGeprek] = useState([]);
+  const [hargaAyamGeprek, setHargaAyamGeprek] = useState([]);
+  const [totalHargaAyamGeprek, setTotalAyamGeprek] = useState([]);
+  const [countAyamGeprek, setCountAyamGeprek] = useState(0);
+
+  //session menu makanan AyamRicarica
+  const [AyamRicarica, setAyamRicarica] = useState([]);
+  const [hargaAyamRicarica, setHargaAyamRicarica] = useState([]);
+  const [totalHargaAyamRicarica, setTotalAyamRicarica] = useState([]);
+  const [countAyamRicarica, setCountAyamRicarica] = useState(0);
+
   const handelAirmineral = () => {
     const menuAirmineral = menuMinuman.find((e) => e.id === 2);
     const minumanAirmineral = menuAirmineral.nama;
@@ -191,9 +203,29 @@ function Home(props) {
     setTotalAyamKalasan(() => countAyamKalasan * hargaAyamKalasan);
   }, [countAyamKalasan]);
 
-  const handleAyamGeprek = () => {};
+  const handleAyamGeprek = () => {
+    const menuAyamGeprek = menuMakanan.find((e) => e.id === 4);
+    const makananAyamGeprek = menuAyamGeprek.nama;
+    const makananHargaAyamGeprek = menuAyamGeprek.harga;
+    setAyamGeprek((t) => [makananAyamGeprek]);
+    setHargaAyamGeprek((t) => [makananHargaAyamGeprek]);
+  };
 
-  const handleAyamRicaRica = () => {};
+  useEffect(() => {
+    setTotalAyamGeprek(() => countAyamGeprek * hargaAyamGeprek);
+  }, [countAyamGeprek]);
+
+  const handleAyamRicaRica = () => {
+    const menuAyamRicarica = menuMakanan.find((e) => e.id === 5);
+    const makananAyamRicarica = menuAyamRicarica.nama;
+    const makananHargaAyamRicarica = menuAyamRicarica.harga;
+    setAyamRicarica((t) => [makananAyamRicarica]);
+    setHargaAyamRicarica((t) => [makananHargaAyamRicarica]);
+  };
+
+  useEffect(() => {
+    setTotalAyamRicarica(() => countAyamRicarica * hargaAyamRicarica);
+  }, [countAyamRicarica]);
 
   const totalHarga = () => {
     setTotalHarga(() => [
@@ -311,6 +343,59 @@ function Home(props) {
                       <th scope="col">Total</th>
                     </thead>
                     <tbody>
+                      {" "}
+                      {AyamRicarica.map((todo) => {
+                        return (
+                          <tr>
+                            <td>{todo}</td>
+                            <td>{hargaAyamRicarica}</td>
+                            <td>
+                              <button
+                                onClick={() =>
+                                  setCountAyamRicarica((c) => c - 1)
+                                }
+                              >
+                                -
+                              </button>
+                            </td>
+                            <td>{countAyamRicarica}</td>
+                            <td>
+                              <button
+                                onClick={() =>
+                                  setCountAyamRicarica((c) => c + 1)
+                                }
+                              >
+                                +
+                              </button>
+                            </td>
+                            <td>{totalHargaAyamRicarica}</td>
+                          </tr>
+                        );
+                      })}
+                      {ayamGeprek.map((todo) => {
+                        return (
+                          <tr>
+                            <td>{todo}</td>
+                            <td>{hargaAyamGeprek}</td>
+                            <td>
+                              <button
+                                onClick={() => setCountAyamGeprek((c) => c - 1)}
+                              >
+                                -
+                              </button>
+                            </td>
+                            <td>{countAyamGeprek}</td>
+                            <td>
+                              <button
+                                onClick={() => setCountAyamGeprek((c) => c + 1)}
+                              >
+                                +
+                              </button>
+                            </td>
+                            <td>{totalHargaAyamGeprek}</td>
+                          </tr>
+                        );
+                      })}
                       {ayamKalasan.map((todo) => {
                         return (
                           <tr>
@@ -412,7 +497,6 @@ function Home(props) {
                           </tr>
                         );
                       })}
-
                       {airMineral.map((todo) => {
                         return (
                           <tr>
@@ -437,7 +521,6 @@ function Home(props) {
                           </tr>
                         );
                       })}
-
                       {tehHangat.map((todo) => {
                         return (
                           <tr>
@@ -458,7 +541,6 @@ function Home(props) {
                           </tr>
                         );
                       })}
-
                       {esJeruk.map((todo) => {
                         return (
                           <tr>
@@ -483,7 +565,6 @@ function Home(props) {
                           </tr>
                         );
                       })}
-
                       <tr>
                         <td>
                           <strong>Total</strong>
