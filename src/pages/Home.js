@@ -2,62 +2,9 @@ import GambarKasir from "./img/kasir.png";
 import "./assets/style.css";
 import { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
-
 import ListStruk from "./ListStruk";
-
 import React from "react";
 import { PDFViewer } from "@react-pdf/renderer";
-
-const menuMakanan = [
-  {
-    id: 1,
-    nama: "ayam goreng",
-    harga: 15000,
-  },
-  {
-    id: 2,
-    nama: "ayam bakar",
-    harga: 25000,
-  },
-  {
-    id: 3,
-    nama: "ayam kalasan",
-    harga: 45000,
-  },
-  {
-    id: 4,
-    nama: "ayam geprek",
-    harga: 35000,
-  },
-  {
-    id: 5,
-    nama: "ayam rica rica",
-    harga: 25000,
-  },
-];
-
-const menuMinuman = [
-  {
-    id: 1,
-    nama: "jus mangga",
-    harga: 10000,
-  },
-  {
-    id: 2,
-    nama: "air mineral",
-    harga: 5000,
-  },
-  {
-    id: 3,
-    nama: "teh hangat",
-    harga: 4000,
-  },
-  {
-    id: 4,
-    nama: "es jeruk",
-    harga: 10000,
-  },
-];
 
 function Home(props) {
   // session total bayar dan kembalian
@@ -88,6 +35,12 @@ function Home(props) {
   const [hargaJusmangga, setHargajusmangga] = useState([]);
   const [totalHargaJusmangga, setTotalJusmangga] = useState([]);
   const [countJusmangga, setCountJusmangga] = useState(0);
+
+  // session menu minuman tehmanis
+  const [esTehmanis, setEstehmanis] = useState([]);
+  const [hargaEstehmanis, setHargaEstehmanis] = useState([]);
+  const [totalHargaEstehmanis, setTotalEstehmanis] = useState([]);
+  const [countEstehmanis, setCountEstehmanis] = useState(0);
 
   //session menu makanan ayamgoreng
   const [ayamGoreng, setAyamGoreng] = useState([]);
@@ -120,127 +73,146 @@ function Home(props) {
   const [countAyamRicarica, setCountAyamRicarica] = useState(0);
 
   const handelAirmineral = () => {
-    const menuAirmineral = menuMinuman.find((e) => e.id === 2);
-    const minumanAirmineral = menuAirmineral.nama;
-    const minumanHargaAirmineral = menuAirmineral.harga;
+    // const menuAirmineral = menuMinuman.find((e) => e.id === 2);
+    const minumanAirmineral = "Air Mineral";
+    const minumanHargaAirmineral = 5000;
     setAirMineral((t) => [minumanAirmineral]);
     setHargaMineral((t) => [minumanHargaAirmineral]);
   };
 
   useEffect(() => {
     setTotalAirmineral(() => countAirmineral * hargaAirmineral);
-  }, [countAirmineral]);
+  }, [countAirmineral, hargaAirmineral]);
 
   const handleTehhangat = () => {
-    const menuTehhangat = menuMinuman.find((e) => e.id === 3);
-    const minumanTehhangat = menuTehhangat.nama;
-    const minumanHargaTehhangat = menuTehhangat.harga;
+    const minumanTehhangat = "Teh Hangat";
+    const minumanHargaTehhangat = 4000;
     setTehhangat((t) => [minumanTehhangat]);
     setHargaTeh((t) => [minumanHargaTehhangat]);
   };
 
   useEffect(() => {
     setTotalTehhangat(() => countTeh * hargaTehhangat);
-  }, [countTeh]);
+  }, [countTeh, hargaTehhangat]);
 
   const handleEsjeruk = () => {
-    const menuEsjeruk = menuMinuman.find((e) => e.id === 4);
-    const minumanEsjeruk = menuEsjeruk.nama;
-    const minumanHargaEsjeruk = menuEsjeruk.harga;
+    const minumanEsjeruk = "Jeruk Hangat";
+    const minumanHargaEsjeruk = 8000;
     setEsjeruk((t) => [minumanEsjeruk]);
     setHargaesjeruk((t) => [minumanHargaEsjeruk]);
   };
 
   useEffect(() => {
     setTotalEsjeruk(() => countEsjeruk * hargaEsjeruk);
-  }, [countEsjeruk]);
+  }, [countEsjeruk, hargaEsjeruk]);
 
   const handleJusMangga = () => {
-    const menuJusmangga = menuMinuman.find((e) => e.id === 1);
-    const minumanJusmangga = menuJusmangga.nama;
-    const minumanHargaJusmangga = menuJusmangga.harga;
+    const minumanJusmangga = "Jus Mangga";
+    const minumanHargaJusmangga = 10000;
     setJusmangga((t) => [minumanJusmangga]);
     setHargajusmangga((t) => [minumanHargaJusmangga]);
   };
 
   useEffect(() => {
     setTotalJusmangga(() => countJusmangga * hargaJusmangga);
-  }, [countJusmangga]);
+  }, [countJusmangga, hargaJusmangga]);
+
+  const handleEstehmanis = () => {
+    const minumanEstehmanis = "Es Teh Manis";
+    const minumanHargaEstehmanis = 5000;
+    setEstehmanis((t) => [minumanEstehmanis]);
+    setHargaEstehmanis((t) => [minumanHargaEstehmanis]);
+  };
+
+  useEffect(() => {
+    setTotalEstehmanis(() => countEstehmanis * hargaEstehmanis);
+  }, [countEstehmanis, hargaEstehmanis]);
 
   const handleAyamGoreng = () => {
-    const menuAyamGoreng = menuMakanan.find((e) => e.id === 1);
-    const makananAyamGoreng = menuAyamGoreng.nama;
-    const makananHargaAyamGoreng = menuAyamGoreng.harga;
+    const makananAyamGoreng = "Ayam Goreng";
+    const makananHargaAyamGoreng = 20000;
     setAyamGoreng((t) => [makananAyamGoreng]);
     setHargaAyamGoreng((t) => [makananHargaAyamGoreng]);
   };
 
   useEffect(() => {
     setTotalAyamGoreng(() => countAyamGoreng * hargaAyamGoreng);
-  }, [countAyamGoreng]);
+  }, [countAyamGoreng, hargaAyamGoreng]);
 
   const handleAyamBakar = () => {
-    const menuAyamBakar = menuMakanan.find((e) => e.id === 2);
-    const makananAyamBakar = menuAyamBakar.nama;
-    const makananHargaAyamBakar = menuAyamBakar.harga;
+    const makananAyamBakar = "Ayam Bakar";
+    const makananHargaAyamBakar = 20000;
     setAyamBakar((t) => [makananAyamBakar]);
     setHargaAyamBakar((t) => [makananHargaAyamBakar]);
   };
 
   useEffect(() => {
     setTotalAyamBakar(() => countAyamBakar * hargaAyamBakar);
-  }, [countAyamBakar]);
+  }, [countAyamBakar, hargaAyamBakar]);
 
   const handleAyamKalasan = () => {
-    const menuAyamKalasan = menuMakanan.find((e) => e.id === 3);
-    const makananAyamKalasan = menuAyamKalasan.nama;
-    const makananHargaAyamKalasan = menuAyamKalasan.harga;
+    const makananAyamKalasan = "Ayam Kalasan";
+    const makananHargaAyamKalasan = 20000;
     setAyamKalasan((t) => [makananAyamKalasan]);
     setHargaAyamKalasan((t) => [makananHargaAyamKalasan]);
   };
 
   useEffect(() => {
     setTotalAyamKalasan(() => countAyamKalasan * hargaAyamKalasan);
-  }, [countAyamKalasan]);
+  }, [countAyamKalasan, hargaAyamKalasan]);
 
   const handleAyamGeprek = () => {
-    const menuAyamGeprek = menuMakanan.find((e) => e.id === 4);
-    const makananAyamGeprek = menuAyamGeprek.nama;
-    const makananHargaAyamGeprek = menuAyamGeprek.harga;
+    const makananAyamGeprek = "Ayam Geprek";
+    const makananHargaAyamGeprek = 20000;
     setAyamGeprek((t) => [makananAyamGeprek]);
     setHargaAyamGeprek((t) => [makananHargaAyamGeprek]);
   };
 
   useEffect(() => {
     setTotalAyamGeprek(() => countAyamGeprek * hargaAyamGeprek);
-  }, [countAyamGeprek]);
+  }, [countAyamGeprek, hargaAyamGeprek]);
 
   const handleAyamRicaRica = () => {
-    const menuAyamRicarica = menuMakanan.find((e) => e.id === 5);
-    const makananAyamRicarica = menuAyamRicarica.nama;
-    const makananHargaAyamRicarica = menuAyamRicarica.harga;
+    const makananAyamRicarica = "Ayam Rica Rica";
+    const makananHargaAyamRicarica = 20000;
     setAyamRicarica((t) => [makananAyamRicarica]);
     setHargaAyamRicarica((t) => [makananHargaAyamRicarica]);
   };
 
   useEffect(() => {
     setTotalAyamRicarica(() => countAyamRicarica * hargaAyamRicarica);
-  }, [countAyamRicarica]);
+  }, [countAyamRicarica, hargaAyamRicarica]);
 
-  const totalHarga = () => {
-    setTotalHarga(() => [
-      Number(totalHargaAirmineral) +
+  useEffect(() => {
+    setTotalHarga(
+      () =>
+        Number(totalHargaAirmineral) +
         Number(totalHargaTehhangat) +
         Number(totalHargaEsjeruk) +
         Number(totalHargaJusmangga) +
+        Number(totalHargaEstehmanis) +
         Number(totalHargaAyamGoreng) +
         Number(totalHargaAyamBakar) +
         Number(totalHargaAyamKalasan) +
         Number(totalHargaAyamGeprek) +
-        Number(totalHargaAyamRicarica),
-    ]);
+        Number(totalHargaAyamRicarica)
+    );
+  }, [
+    totalHargaAirmineral,
+    totalHargaTehhangat,
+    totalHargaEsjeruk,
+    totalHargaJusmangga,
+    totalHargaEstehmanis,
+    totalHargaAyamGoreng,
+    totalHargaAyamBakar,
+    totalHargaAyamKalasan,
+    totalHargaAyamGeprek,
+    totalHargaAyamRicarica,
+  ]);
+
+  function totalHarga() {
     setDataKembalian(() => [dataBayar - totalHargaMenu]);
-  };
+  }
 
   const inputanBayar = (e) => {
     setDataBayar(e.target.value);
@@ -324,7 +296,12 @@ function Home(props) {
               </div>
               <div class="col">
                 <button class="p-3 border bg-light" onClick={handleEsjeruk}>
-                  Es Jeruk
+                  Jeruk Hangat
+                </button>
+              </div>
+              <div class="col">
+                <button class="p-3 border bg-light" onClick={handleEstehmanis}>
+                  Es Teh Manis
                 </button>
               </div>
             </div>
@@ -566,6 +543,30 @@ function Home(props) {
                           </tr>
                         );
                       })}
+                      {esTehmanis.map((todo) => {
+                        return (
+                          <tr>
+                            <td>{todo}</td>
+                            <td>{hargaEstehmanis}</td>
+                            <td>
+                              <button
+                                onClick={() => setCountEstehmanis((c) => c - 1)}
+                              >
+                                -
+                              </button>
+                            </td>
+                            <td>{countEstehmanis}</td>
+                            <td>
+                              <button
+                                onClick={() => setCountEstehmanis((c) => c + 1)}
+                              >
+                                +
+                              </button>
+                            </td>
+                            <td>{totalHargaEstehmanis}</td>
+                          </tr>
+                        );
+                      })}
                       <tr>
                         <td>
                           <strong>Total</strong>
@@ -689,6 +690,11 @@ function Home(props) {
                               hargaEsjeruk={hargaEsjeruk}
                               countEsjeruk={countEsjeruk}
                               totalHargaEsjeruk={totalHargaEsjeruk}
+                              //session esjeruk
+                              esTehmanis={esTehmanis}
+                              hargaEstehmanis={hargaEstehmanis}
+                              countEstehmanis={countEstehmanis}
+                              totalHargaEstehmanis={totalHargaEstehmanis}
                               // session total struk
                               totalHargaMenu={totalHargaMenu}
                               dataKembalian={dataKembalian}

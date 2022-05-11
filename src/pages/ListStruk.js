@@ -150,6 +150,10 @@ const MyDocument = ({
   hargaEsjeruk,
   countEsjeruk,
   totalHargaEsjeruk,
+  esTehmanis,
+  hargaEstehmanis,
+  countEstehmanis,
+  totalHargaEstehmanis,
   totalHargaMenu,
   dataKembalian,
   dataBayar,
@@ -238,6 +242,14 @@ const MyDocument = ({
               <Text style={stylesItem.qty}>{hargaEsjeruk}</Text>
               <Text style={stylesItem.rate}>{countEsjeruk}</Text>
               <Text style={stylesItem.amount}>{totalHargaEsjeruk}</Text>
+            </View>
+          ))}
+          {esTehmanis.map((nama) => (
+            <View style={stylesItem.row}>
+              <Text style={stylesItem.description}>{nama}</Text>
+              <Text style={stylesItem.qty}>{hargaEstehmanis}</Text>
+              <Text style={stylesItem.rate}>{countEstehmanis}</Text>
+              <Text style={stylesItem.amount}>{totalHargaEstehmanis}</Text>
             </View>
           ))}
           <View style={stylesItem.row}>
