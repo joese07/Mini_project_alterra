@@ -609,17 +609,22 @@ function Home(props) {
                           </button>
                         }
                       >
-                        <div className="posisi-popup">
-                          <label>Masukkan Nominal Bayar</label>
-                          <br></br>
-                          <input
-                            type="number"
-                            placeholder="Rupiah"
-                            onChange={inputanBayar}
-                          ></input>
-                          <br></br>
-                          <button onClick={totalHarga}>Bayar</button>
-                        </div>
+                        {(close) => (
+                          <div className="posisi-popup">
+                            <label>Masukkan Nominal Bayar</label>
+                            <br></br>
+                            <input
+                              type="number"
+                              placeholder="Rupiah"
+                              onChange={inputanBayar}
+                            ></input>
+                            <br></br>
+                            <button onClick={totalHarga}>Bayar</button>
+                            <button className="close" onClick={close}>
+                              Close
+                            </button>
+                          </div>
+                        )}
                       </Popup>
                     </div>
                     <div class="col">
@@ -636,17 +641,68 @@ function Home(props) {
                           </button>
                         }
                       >
-                        <PDFViewer width={800} height={500}>
-                          <ListStruk
-                            ayamBakar={ayamBakar}
-                            hargaAyamBakar={hargaAyamBakar}
-                            countAyamBakar={countAyamBakar}
-                            totalHargaAyamBakar={totalHargaAyamBakar}
-                            totalHargaMenu={totalHargaMenu}
-                            dataKembalian={dataKembalian}
-                            dataBayar={dataBayar}
-                          />
-                        </PDFViewer>
+                        <div>
+                          <PDFViewer width={800} height={500}>
+                            <ListStruk
+                              // session struk ayam bakar
+                              ayamBakar={ayamBakar}
+                              hargaAyamBakar={hargaAyamBakar}
+                              countAyamBakar={countAyamBakar}
+                              totalHargaAyamBakar={totalHargaAyamBakar}
+                              // session struk ayamricarica
+                              AyamRicarica={AyamRicarica}
+                              hargaAyamRicarica={hargaAyamRicarica}
+                              countAyamRicarica={countAyamRicarica}
+                              totalHargaAyamRicarica={totalHargaAyamRicarica}
+                              // session struk ayam geprek
+                              ayamGeprek={ayamGeprek}
+                              hargaAyamGeprek={hargaAyamGeprek}
+                              countAyamGeprek={countAyamGeprek}
+                              totalHargaAyamGeprek={totalHargaAyamGeprek}
+                              // session struk ayam kalasan
+                              ayamKalasan={ayamKalasan}
+                              hargaAyamKalasan={hargaAyamKalasan}
+                              countAyamKalasan={countAyamKalasan}
+                              totalHargaAyamKalasan={totalHargaAyamKalasan}
+                              // session struk ayam goreng
+                              ayamGoreng={ayamGoreng}
+                              hargaAyamGoreng={hargaAyamGoreng}
+                              countAyamGoreng={countAyamGoreng}
+                              totalHargaAyamGoreng={totalHargaAyamGoreng}
+                              //session struk jusmangga
+                              jusMangga={jusMangga}
+                              hargaJusmangga={hargaJusmangga}
+                              countJusmangga={countJusmangga}
+                              totalHargaJusmangga={totalHargaJusmangga}
+                              //session struk airMineral
+                              airMineral={airMineral}
+                              hargaAirmineral={hargaAirmineral}
+                              countAirmineral={countAirmineral}
+                              totalHargaAirmineral={totalHargaAirmineral}
+                              //session struk tehhangat
+                              tehHangat={tehHangat}
+                              hargaTehhangat={hargaTehhangat}
+                              countTeh={countTeh}
+                              totalHargaTehhangat={totalHargaTehhangat}
+                              //session esjeruk
+                              esJeruk={esJeruk}
+                              hargaEsjeruk={hargaEsjeruk}
+                              countEsjeruk={countEsjeruk}
+                              totalHargaEsjeruk={totalHargaEsjeruk}
+                              // session total struk
+                              totalHargaMenu={totalHargaMenu}
+                              dataKembalian={dataKembalian}
+                              dataBayar={dataBayar}
+                            />
+                          </PDFViewer>
+                          <p></p>
+                          <button
+                            className="close"
+                            onClick={() => window.location.reload()}
+                          >
+                            Tutup
+                          </button>
+                        </div>
                       </Popup>
                     </div>
                   </div>

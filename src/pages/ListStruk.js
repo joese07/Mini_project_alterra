@@ -118,6 +118,38 @@ const MyDocument = ({
   hargaAyamBakar,
   countAyamBakar,
   totalHargaAyamBakar,
+  AyamRicarica,
+  hargaAyamRicarica,
+  countAyamRicarica,
+  totalHargaAyamRicarica,
+  ayamGeprek,
+  hargaAyamGeprek,
+  countAyamGeprek,
+  totalHargaAyamGeprek,
+  ayamKalasan,
+  hargaAyamKalasan,
+  countAyamKalasan,
+  totalHargaAyamKalasan,
+  ayamGoreng,
+  hargaAyamGoreng,
+  countAyamGoreng,
+  totalHargaAyamGoreng,
+  jusMangga,
+  hargaJusmangga,
+  countJusmangga,
+  totalHargaJusmangga,
+  airMineral,
+  hargaAirmineral,
+  countAirmineral,
+  totalHargaAirmineral,
+  tehHangat,
+  hargaTehhangat,
+  countTeh,
+  totalHargaTehhangat,
+  esJeruk,
+  hargaEsjeruk,
+  countEsjeruk,
+  totalHargaEsjeruk,
   totalHargaMenu,
   dataKembalian,
   dataBayar,
@@ -136,13 +168,76 @@ const MyDocument = ({
             <Text style={styles.rate}>Qty</Text>
             <Text style={styles.amount}>Total</Text>
           </View>
-
+          {AyamRicarica.map((nama) => (
+            <View style={stylesItem.row}>
+              <Text style={stylesItem.description}>{nama}</Text>
+              <Text style={stylesItem.qty}>{hargaAyamRicarica}</Text>
+              <Text style={stylesItem.rate}>{countAyamRicarica}</Text>
+              <Text style={stylesItem.amount}>{totalHargaAyamRicarica}</Text>
+            </View>
+          ))}
+          {ayamGeprek.map((nama) => (
+            <View style={stylesItem.row}>
+              <Text style={stylesItem.description}>{nama}</Text>
+              <Text style={stylesItem.qty}>{hargaAyamGeprek}</Text>
+              <Text style={stylesItem.rate}>{countAyamGeprek}</Text>
+              <Text style={stylesItem.amount}>{totalHargaAyamGeprek}</Text>
+            </View>
+          ))}
+          {ayamKalasan.map((nama) => (
+            <View style={stylesItem.row}>
+              <Text style={stylesItem.description}>{nama}</Text>
+              <Text style={stylesItem.qty}>{hargaAyamKalasan}</Text>
+              <Text style={stylesItem.rate}>{countAyamKalasan}</Text>
+              <Text style={stylesItem.amount}>{totalHargaAyamKalasan}</Text>
+            </View>
+          ))}
           {ayamBakar.map((nama) => (
             <View style={stylesItem.row}>
               <Text style={stylesItem.description}>{nama}</Text>
               <Text style={stylesItem.qty}>{hargaAyamBakar}</Text>
               <Text style={stylesItem.rate}>{countAyamBakar}</Text>
               <Text style={stylesItem.amount}>{totalHargaAyamBakar}</Text>
+            </View>
+          ))}
+          {ayamGoreng.map((nama) => (
+            <View style={stylesItem.row}>
+              <Text style={stylesItem.description}>{nama}</Text>
+              <Text style={stylesItem.qty}>{hargaAyamGoreng}</Text>
+              <Text style={stylesItem.rate}>{countAyamGoreng}</Text>
+              <Text style={stylesItem.amount}>{totalHargaAyamGoreng}</Text>
+            </View>
+          ))}
+          {jusMangga.map((nama) => (
+            <View style={stylesItem.row}>
+              <Text style={stylesItem.description}>{nama}</Text>
+              <Text style={stylesItem.qty}>{hargaJusmangga}</Text>
+              <Text style={stylesItem.rate}>{countJusmangga}</Text>
+              <Text style={stylesItem.amount}>{totalHargaJusmangga}</Text>
+            </View>
+          ))}
+          {airMineral.map((nama) => (
+            <View style={stylesItem.row}>
+              <Text style={stylesItem.description}>{nama}</Text>
+              <Text style={stylesItem.qty}>{hargaAirmineral}</Text>
+              <Text style={stylesItem.rate}>{countAirmineral}</Text>
+              <Text style={stylesItem.amount}>{totalHargaAirmineral}</Text>
+            </View>
+          ))}
+          {tehHangat.map((nama) => (
+            <View style={stylesItem.row}>
+              <Text style={stylesItem.description}>{nama}</Text>
+              <Text style={stylesItem.qty}>{hargaTehhangat}</Text>
+              <Text style={stylesItem.rate}>{countTeh}</Text>
+              <Text style={stylesItem.amount}>{totalHargaTehhangat}</Text>
+            </View>
+          ))}
+          {esJeruk.map((nama) => (
+            <View style={stylesItem.row}>
+              <Text style={stylesItem.description}>{nama}</Text>
+              <Text style={stylesItem.qty}>{hargaEsjeruk}</Text>
+              <Text style={stylesItem.rate}>{countEsjeruk}</Text>
+              <Text style={stylesItem.amount}>{totalHargaEsjeruk}</Text>
             </View>
           ))}
           <View style={stylesItem.row}>
