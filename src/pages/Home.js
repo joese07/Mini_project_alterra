@@ -2,11 +2,11 @@ import GambarKasir from "./img/kasir.png";
 import "./assets/style.css";
 import { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
-import React from "react";
+
 import ListStruk from "./ListStruk";
 
-// const menuSatu = "Ayam Goreng";
-// const hargaSatu = 15000;
+import React from "react";
+import { PDFViewer } from "@react-pdf/renderer";
 
 const menuMakanan = [
   {
@@ -235,7 +235,9 @@ function Home(props) {
         Number(totalHargaJusmangga) +
         Number(totalHargaAyamGoreng) +
         Number(totalHargaAyamBakar) +
-        Number(totalHargaAyamKalasan),
+        Number(totalHargaAyamKalasan) +
+        Number(totalHargaAyamGeprek) +
+        Number(totalHargaAyamRicarica),
     ]);
     setDataKembalian(() => [dataBayar - totalHargaMenu]);
   };
@@ -343,7 +345,6 @@ function Home(props) {
                       <th scope="col">Total</th>
                     </thead>
                     <tbody>
-                      {" "}
                       {AyamRicarica.map((todo) => {
                         return (
                           <tr>
@@ -622,9 +623,31 @@ function Home(props) {
                       </Popup>
                     </div>
                     <div class="col">
-                      <button>
-                        <div class="p-3 border bg-light">Print</div>
-                      </button>
+                      <Popup
+                        modal
+                        trigger={
+                          <button>
+                            <div
+                              class="p-3 border bg-light"
+                              onClick={totalHarga}
+                            >
+                              Print
+                            </div>
+                          </button>
+                        }
+                      >
+                        <PDFViewer width={800} height={500}>
+                          <ListStruk
+                            ayamBakar={ayamBakar}
+                            hargaAyamBakar={hargaAyamBakar}
+                            countAyamBakar={countAyamBakar}
+                            totalHargaAyamBakar={totalHargaAyamBakar}
+                            totalHargaMenu={totalHargaMenu}
+                            dataKembalian={dataKembalian}
+                            dataBayar={dataBayar}
+                          />
+                        </PDFViewer>
+                      </Popup>
                     </div>
                   </div>
                 </div>
