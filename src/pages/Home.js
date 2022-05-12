@@ -5,6 +5,36 @@ import Popup from "reactjs-popup";
 import ListStruk from "./ListStruk";
 import React from "react";
 import { PDFViewer } from "@react-pdf/renderer";
+import MenuMakanan from "./MenuMakanan";
+import MenuMinuman from "./MenuMinuman";
+import MenuStruk from "./MenuStruk";
+// import { gql, useMutation } from "@apollo/client";
+
+// const insertStruk = gql`
+//   mutation InsertStruk(
+//     $kembalian: String
+//     $menu: String
+//     $quantity: String
+//     $satuan: String
+//     $sub_total: String
+//     $total: String
+//     $uang_bayar: String
+//   ) {
+//     insert_struk(
+//       objects: {
+//         menu: $menu
+//         satuan: $satuan
+//         quantity: $quantity
+//         total: $total
+//         sub_total: $sub_total
+//         uang_bayar: $uang_bayar
+//         kembalian: $kembalian
+//       }
+//     ) {
+//       affected_rows
+//     }
+//   }
+// `;
 
 function Home(props) {
   // session total bayar dan kembalian
@@ -71,6 +101,8 @@ function Home(props) {
   const [hargaAyamRicarica, setHargaAyamRicarica] = useState([]);
   const [totalHargaAyamRicarica, setTotalAyamRicarica] = useState([]);
   const [countAyamRicarica, setCountAyamRicarica] = useState(0);
+
+  // const [InsertStruk, { loading: loadinginsert }] = useMutation(insertStruk);
 
   const handelAirmineral = () => {
     // const menuAirmineral = menuMinuman.find((e) => e.id === 2);
@@ -219,7 +251,70 @@ function Home(props) {
     console.log(" Input nominal ", dataBayar);
   };
 
-  console.log(ayamGoreng + totalHargaAyamGoreng);
+  const saveData = () => {
+    // InsertStruk({
+    //   variables: {
+    //     menu: ayamBakar + ayamGeprek + ayamGoreng + ayamKalasan + AyamRicarica,
+    //     satuan:
+    //       hargaAyamBakar +
+    //       hargaAyamGeprek +
+    //       hargaAyamGoreng +
+    //       hargaAyamKalasan +
+    //       hargaAyamRicarica,
+    //     quantity:
+    //       countAyamBakar +
+    //       countAyamGeprek +
+    //       countAyamGoreng +
+    //       countAyamKalasan +
+    //       countAyamRicarica,
+    //     total:
+    //       totalHargaAyamBakar +
+    //       totalHargaAyamGeprek +
+    //       totalHargaAyamGoreng +
+    //       totalHargaAyamKalasan +
+    //       totalHargaAyamRicarica,
+    //     sub_total: totalHargaMenu,
+    //     uang_bayar: dataBayar,
+    //     kembalian: dataKembalian,
+    //   },
+    // });
+    // console.log("sub total harga belanjaan cust " + totalHargaMenu);
+    // console.log("jumlah uang cust " + dataBayar);
+    // console.log("jumlah kembalian cust " + dataKembalian);
+    // console.log(
+    //   "makanan yang dipesan " +
+    //     ayamBakar +
+    //     ayamGeprek +
+    //     ayamGoreng +
+    //     ayamKalasan +
+    //     AyamRicarica
+    // );
+    // console.log(
+    //   "harga barang satuan  " +
+    //     hargaAyamBakar +
+    //     hargaAyamGeprek +
+    //     hargaAyamGoreng +
+    //     hargaAyamKalasan +
+    //     hargaAyamRicarica
+    // );
+    // console.log(
+    //   "banyaknya barang " +
+    //     countAyamBakar +
+    //     countAyamGeprek +
+    //     countAyamGoreng +
+    //     countAyamKalasan +
+    //     countAyamRicarica
+    // );
+    // console.log(
+    //   "total harga barang " +
+    //     totalHargaAyamBakar +
+    //     totalHargaAyamGeprek +
+    //     totalHargaAyamGoreng +
+    //     totalHargaAyamKalasan +
+    //     totalHargaAyamRicarica
+    // );
+  };
+
   return (
     <div>
       <nav className="navbar navbar-light bg-light">
@@ -243,68 +338,25 @@ function Home(props) {
               MENU MAKANAN
             </div>
 
-            <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 mt-3">
-              <div class="col">
-                <button class="p-3 border bg-light" onClick={handleAyamGoreng}>
-                  Ayam Goreng
-                </button>
-              </div>
-              <div class="col">
-                <button class="p-3 border bg-light" onClick={handleAyamBakar}>
-                  Ayam Bakar
-                </button>
-              </div>
-              <div class="col">
-                <button class="p-3 border bg-light" onClick={handleAyamKalasan}>
-                  Ayam Kalasan
-                </button>
-              </div>
-              <div class="col">
-                <button class="p-3 border bg-light" onClick={handleAyamGeprek}>
-                  Ayam Geprek
-                </button>
-              </div>
-              <div class="col">
-                <button
-                  class="p-3 border bg-light"
-                  onClick={handleAyamRicaRica}
-                >
-                  Ayam Rica Rica
-                </button>
-              </div>
-            </div>
+            <MenuMakanan
+              handleAyamBakar={handleAyamBakar}
+              handleAyamGeprek={handleAyamGeprek}
+              handleAyamGoreng={handleAyamGoreng}
+              handleAyamKalasan={handleAyamKalasan}
+              handleAyamRicaRica={handleAyamRicaRica}
+            />
           </div>
           <div className="col">
             <div className="p-3 border bg-primary bg-opacity-75">
               MENU MINUMAN
             </div>
-            <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 mt-3">
-              <div class="col">
-                <button class="p-3 border bg-light" onClick={handleJusMangga}>
-                  Jus Mangga
-                </button>
-              </div>
-              <div class="col">
-                <button class="p-3 border bg-light" onClick={handelAirmineral}>
-                  Air Mineral
-                </button>
-              </div>
-              <div class="col">
-                <button class="p-3 border bg-light" onClick={handleTehhangat}>
-                  Teh Hangat
-                </button>
-              </div>
-              <div class="col">
-                <button class="p-3 border bg-light" onClick={handleEsjeruk}>
-                  Jeruk Hangat
-                </button>
-              </div>
-              <div class="col">
-                <button class="p-3 border bg-light" onClick={handleEstehmanis}>
-                  Es Teh Manis
-                </button>
-              </div>
-            </div>
+            <MenuMinuman
+              handleEsjeruk={handleEsjeruk}
+              handelAirmineral={handelAirmineral}
+              handleEstehmanis={handleEstehmanis}
+              handleJusMangga={handleJusMangga}
+              handleTehhangat={handleTehhangat}
+            />
           </div>
           <div className="col jarak-kanan">
             <div className="p-3 border bg-light">STRUK</div>
@@ -312,294 +364,71 @@ function Home(props) {
               <div className="col">
                 <div className="p-3 border bg-light mt-4">
                   ISI STRUK
-                  <table className="table">
-                    <thead>
-                      <th scope="col">Menu</th>
-                      <th scope="col">Satuan</th>
-                      <th scope="col"></th>
-                      <th scope="col">Qty</th>
-                      <th scope="col"></th>
-                      <th scope="col">Total</th>
-                    </thead>
-                    <tbody>
-                      {AyamRicarica.map((todo) => {
-                        return (
-                          <tr>
-                            <td>{todo}</td>
-                            <td>{hargaAyamRicarica}</td>
-                            <td>
-                              <button
-                                onClick={() =>
-                                  setCountAyamRicarica((c) => c - 1)
-                                }
-                              >
-                                -
-                              </button>
-                            </td>
-                            <td>{countAyamRicarica}</td>
-                            <td>
-                              <button
-                                onClick={() =>
-                                  setCountAyamRicarica((c) => c + 1)
-                                }
-                              >
-                                +
-                              </button>
-                            </td>
-                            <td>{totalHargaAyamRicarica}</td>
-                          </tr>
-                        );
-                      })}
-                      {ayamGeprek.map((todo) => {
-                        return (
-                          <tr>
-                            <td>{todo}</td>
-                            <td>{hargaAyamGeprek}</td>
-                            <td>
-                              <button
-                                onClick={() => setCountAyamGeprek((c) => c - 1)}
-                              >
-                                -
-                              </button>
-                            </td>
-                            <td>{countAyamGeprek}</td>
-                            <td>
-                              <button
-                                onClick={() => setCountAyamGeprek((c) => c + 1)}
-                              >
-                                +
-                              </button>
-                            </td>
-                            <td>{totalHargaAyamGeprek}</td>
-                          </tr>
-                        );
-                      })}
-                      {ayamKalasan.map((todo) => {
-                        return (
-                          <tr>
-                            <td>{todo}</td>
-                            <td>{hargaAyamKalasan}</td>
-                            <td>
-                              <button
-                                onClick={() =>
-                                  setCountAyamKalasan((c) => c - 1)
-                                }
-                              >
-                                -
-                              </button>
-                            </td>
-                            <td>{countAyamKalasan}</td>
-                            <td>
-                              <button
-                                onClick={() =>
-                                  setCountAyamKalasan((c) => c + 1)
-                                }
-                              >
-                                +
-                              </button>
-                            </td>
-                            <td>{totalHargaAyamKalasan}</td>
-                          </tr>
-                        );
-                      })}
-                      {ayamBakar.map((todo) => {
-                        return (
-                          <tr>
-                            <td>{todo}</td>
-                            <td>{hargaAyamBakar}</td>
-                            <td>
-                              <button
-                                onClick={() => setCountAyamBakar((c) => c - 1)}
-                              >
-                                -
-                              </button>
-                            </td>
-                            <td>{countAyamBakar}</td>
-                            <td>
-                              <button
-                                onClick={() => setCountAyamBakar((c) => c + 1)}
-                              >
-                                +
-                              </button>
-                            </td>
-                            <td>{totalHargaAyamBakar}</td>
-                          </tr>
-                        );
-                      })}
-                      {ayamGoreng.map((todo) => {
-                        return (
-                          <tr>
-                            <td>{todo}</td>
-                            <td>{hargaAyamGoreng}</td>
-                            <td>
-                              <button
-                                onClick={() => setCountAyamGoreng((c) => c - 1)}
-                              >
-                                -
-                              </button>
-                            </td>
-                            <td>{countAyamGoreng}</td>
-                            <td>
-                              <button
-                                onClick={() => setCountAyamGoreng((c) => c + 1)}
-                              >
-                                +
-                              </button>
-                            </td>
-                            <td>{totalHargaAyamGoreng}</td>
-                          </tr>
-                        );
-                      })}
-                      {/* session minuman */}
-                      {jusMangga.map((todo) => {
-                        return (
-                          <tr>
-                            <td>{todo}</td>
-                            <td>{hargaJusmangga}</td>
-                            <td>
-                              <button
-                                onClick={() => setCountJusmangga((c) => c - 1)}
-                              >
-                                -
-                              </button>
-                            </td>
-                            <td>{countJusmangga}</td>
-                            <td>
-                              <button
-                                onClick={() => setCountJusmangga((c) => c + 1)}
-                              >
-                                +
-                              </button>
-                            </td>
-                            <td>{totalHargaJusmangga}</td>
-                          </tr>
-                        );
-                      })}
-                      {airMineral.map((todo) => {
-                        return (
-                          <tr>
-                            <td>{todo}</td>
-                            <td>{hargaAirmineral}</td>
-                            <td>
-                              <button
-                                onClick={() => setCountAirmineral((c) => c - 1)}
-                              >
-                                -
-                              </button>
-                            </td>
-                            <td>{countAirmineral}</td>
-                            <td>
-                              <button
-                                onClick={() => setCountAirmineral((c) => c + 1)}
-                              >
-                                +
-                              </button>
-                            </td>
-                            <td>{totalHargaAirmineral}</td>
-                          </tr>
-                        );
-                      })}
-                      {tehHangat.map((todo) => {
-                        return (
-                          <tr>
-                            <td>{todo}</td>
-                            <td>{hargaTehhangat}</td>
-                            <td>
-                              <button onClick={() => setCountTeh((c) => c - 1)}>
-                                -
-                              </button>
-                            </td>
-                            <td>{countTeh}</td>
-                            <td>
-                              <button onClick={() => setCountTeh((c) => c + 1)}>
-                                +
-                              </button>
-                            </td>
-                            <td>{totalHargaTehhangat}</td>
-                          </tr>
-                        );
-                      })}
-                      {esJeruk.map((todo) => {
-                        return (
-                          <tr>
-                            <td>{todo}</td>
-                            <td>{hargaEsjeruk}</td>
-                            <td>
-                              <button
-                                onClick={() => setCountEsjeruk((c) => c - 1)}
-                              >
-                                -
-                              </button>
-                            </td>
-                            <td>{countEsjeruk}</td>
-                            <td>
-                              <button
-                                onClick={() => setCountEsjeruk((c) => c + 1)}
-                              >
-                                +
-                              </button>
-                            </td>
-                            <td>{totalHargaEsjeruk}</td>
-                          </tr>
-                        );
-                      })}
-                      {esTehmanis.map((todo) => {
-                        return (
-                          <tr>
-                            <td>{todo}</td>
-                            <td>{hargaEstehmanis}</td>
-                            <td>
-                              <button
-                                onClick={() => setCountEstehmanis((c) => c - 1)}
-                              >
-                                -
-                              </button>
-                            </td>
-                            <td>{countEstehmanis}</td>
-                            <td>
-                              <button
-                                onClick={() => setCountEstehmanis((c) => c + 1)}
-                              >
-                                +
-                              </button>
-                            </td>
-                            <td>{totalHargaEstehmanis}</td>
-                          </tr>
-                        );
-                      })}
-                      <tr>
-                        <td>
-                          <strong>Total</strong>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>{totalHargaMenu}</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <strong>Bayar</strong>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>{dataBayar}</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <strong>Kembalian</strong>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>{dataKembalian}</td>
-                      </tr>
-                    </tbody>
-                    {/* <ListStruk data={todos} name={todoss} /> */}
-                  </table>
+                  <MenuStruk // session struk ayam bakar
+                    ayamBakar={ayamBakar}
+                    hargaAyamBakar={hargaAyamBakar}
+                    countAyamBakar={countAyamBakar}
+                    totalHargaAyamBakar={totalHargaAyamBakar}
+                    setCountAyamBakar={setCountAyamBakar}
+                    // session struk ayamricarica
+                    AyamRicarica={AyamRicarica}
+                    hargaAyamRicarica={hargaAyamRicarica}
+                    countAyamRicarica={countAyamRicarica}
+                    totalHargaAyamRicarica={totalHargaAyamRicarica}
+                    setCountAyamRicarica={setCountAyamRicarica}
+                    // session struk ayam geprek
+                    ayamGeprek={ayamGeprek}
+                    hargaAyamGeprek={hargaAyamGeprek}
+                    countAyamGeprek={countAyamGeprek}
+                    totalHargaAyamGeprek={totalHargaAyamGeprek}
+                    setCountAyamGeprek={setCountAyamGeprek}
+                    // session struk ayam kalasan
+                    ayamKalasan={ayamKalasan}
+                    hargaAyamKalasan={hargaAyamKalasan}
+                    countAyamKalasan={countAyamKalasan}
+                    totalHargaAyamKalasan={totalHargaAyamKalasan}
+                    setCountAyamKalasan={setCountAyamKalasan}
+                    // session struk ayam goreng
+                    ayamGoreng={ayamGoreng}
+                    hargaAyamGoreng={hargaAyamGoreng}
+                    countAyamGoreng={countAyamGoreng}
+                    totalHargaAyamGoreng={totalHargaAyamGoreng}
+                    setCountAyamGoreng={setCountAyamGoreng}
+                    //session struk jusmangga
+                    jusMangga={jusMangga}
+                    hargaJusmangga={hargaJusmangga}
+                    countJusmangga={countJusmangga}
+                    totalHargaJusmangga={totalHargaJusmangga}
+                    setCountJusmangga={setCountJusmangga}
+                    //session struk airMineral
+                    airMineral={airMineral}
+                    hargaAirmineral={hargaAirmineral}
+                    countAirmineral={countAirmineral}
+                    totalHargaAirmineral={totalHargaAirmineral}
+                    setCountAirmineral={setCountAirmineral}
+                    //session struk tehhangat
+                    tehHangat={tehHangat}
+                    hargaTehhangat={hargaTehhangat}
+                    countTeh={countTeh}
+                    totalHargaTehhangat={totalHargaTehhangat}
+                    setCountTeh={setCountTeh}
+                    //session esjeruk
+                    esJeruk={esJeruk}
+                    hargaEsjeruk={hargaEsjeruk}
+                    countEsjeruk={countEsjeruk}
+                    totalHargaEsjeruk={totalHargaEsjeruk}
+                    setCountEsjeruk={setCountEsjeruk}
+                    //session es teh manis
+                    esTehmanis={esTehmanis}
+                    hargaEstehmanis={hargaEstehmanis}
+                    countEstehmanis={countEstehmanis}
+                    totalHargaEstehmanis={totalHargaEstehmanis}
+                    setCountEstehmanis={setCountEstehmanis}
+                    // session total struk
+                    totalHargaMenu={totalHargaMenu}
+                    dataKembalian={dataKembalian}
+                    dataBayar={dataBayar}
+                  />
                   <div className="row">
                     <div class="col">
                       <Popup
@@ -708,6 +537,7 @@ function Home(props) {
                           >
                             Tutup
                           </button>
+                          <button onClick={saveData}>Save</button>
                         </div>
                       </Popup>
                     </div>
