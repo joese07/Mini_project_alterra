@@ -8,33 +8,47 @@ import { PDFViewer } from "@react-pdf/renderer";
 import MenuMakanan from "./MenuMakanan";
 import MenuMinuman from "./MenuMinuman";
 import MenuStruk from "./MenuStruk";
-// import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 
-// const insertStruk = gql`
-//   mutation InsertStruk(
-//     $kembalian: String
-//     $menu: String
-//     $quantity: String
-//     $satuan: String
-//     $sub_total: String
-//     $total: String
-//     $uang_bayar: String
-//   ) {
-//     insert_struk(
-//       objects: {
-//         menu: $menu
-//         satuan: $satuan
-//         quantity: $quantity
-//         total: $total
-//         sub_total: $sub_total
-//         uang_bayar: $uang_bayar
-//         kembalian: $kembalian
-//       }
-//     ) {
-//       affected_rows
-//     }
-//   }
-// `;
+const getStruk = gql`
+  query MyQuery {
+    struk {
+      id
+      menu
+      satuan
+      quantity
+      total
+      sub_total
+      uang_bayar
+      kembalian
+    }
+  }
+`;
+const insertStruk = gql`
+  mutation InsertStruk(
+    $kembalian: String
+    $menu: String
+    $quantity: String
+    $satuan: String
+    $sub_total: String
+    $total: String
+    $uang_bayar: String
+  ) {
+    insert_struk(
+      objects: {
+        menu: $menu
+        satuan: $satuan
+        quantity: $quantity
+        total: $total
+        sub_total: $sub_total
+        uang_bayar: $uang_bayar
+        kembalian: $kembalian
+      }
+    ) {
+      affected_rows
+    }
+  }
+`;
 
 function Home(props) {
   // session total bayar dan kembalian
@@ -102,7 +116,9 @@ function Home(props) {
   const [totalHargaAyamRicarica, setTotalAyamRicarica] = useState([]);
   const [countAyamRicarica, setCountAyamRicarica] = useState(0);
 
-  // const [InsertStruk, { loading: loadinginsert }] = useMutation(insertStruk);
+  const [InsertStruk, { loading }] = useMutation(insertStruk, {
+    refetchQueries: [getStruk],
+  });
 
   const handelAirmineral = () => {
     // const menuAirmineral = menuMinuman.find((e) => e.id === 2);
@@ -174,8 +190,8 @@ function Home(props) {
   const handleAyamBakar = () => {
     const makananAyamBakar = "Ayam Bakar";
     const makananHargaAyamBakar = 20000;
-    setAyamBakar((t) => [makananAyamBakar]);
-    setHargaAyamBakar((t) => [makananHargaAyamBakar]);
+    setAyamBakar(() => [makananAyamBakar]);
+    setHargaAyamBakar(() => [makananHargaAyamBakar]);
   };
 
   useEffect(() => {
@@ -252,67 +268,24 @@ function Home(props) {
   };
 
   const saveData = () => {
-    // InsertStruk({
-    //   variables: {
-    //     menu: ayamBakar + ayamGeprek + ayamGoreng + ayamKalasan + AyamRicarica,
-    //     satuan:
-    //       hargaAyamBakar +
-    //       hargaAyamGeprek +
-    //       hargaAyamGoreng +
-    //       hargaAyamKalasan +
-    //       hargaAyamRicarica,
-    //     quantity:
-    //       countAyamBakar +
-    //       countAyamGeprek +
-    //       countAyamGoreng +
-    //       countAyamKalasan +
-    //       countAyamRicarica,
-    //     total:
-    //       totalHargaAyamBakar +
-    //       totalHargaAyamGeprek +
-    //       totalHargaAyamGoreng +
-    //       totalHargaAyamKalasan +
-    //       totalHargaAyamRicarica,
-    //     sub_total: totalHargaMenu,
-    //     uang_bayar: dataBayar,
-    //     kembalian: dataKembalian,
-    //   },
-    // });
-    // console.log("sub total harga belanjaan cust " + totalHargaMenu);
-    // console.log("jumlah uang cust " + dataBayar);
-    // console.log("jumlah kembalian cust " + dataKembalian);
-    // console.log(
-    //   "makanan yang dipesan " +
-    //     ayamBakar +
-    //     ayamGeprek +
-    //     ayamGoreng +
-    //     ayamKalasan +
-    //     AyamRicarica
-    // );
-    // console.log(
-    //   "harga barang satuan  " +
-    //     hargaAyamBakar +
-    //     hargaAyamGeprek +
-    //     hargaAyamGoreng +
-    //     hargaAyamKalasan +
-    //     hargaAyamRicarica
-    // );
-    // console.log(
-    //   "banyaknya barang " +
-    //     countAyamBakar +
-    //     countAyamGeprek +
-    //     countAyamGoreng +
-    //     countAyamKalasan +
-    //     countAyamRicarica
-    // );
-    // console.log(
-    //   "total harga barang " +
-    //     totalHargaAyamBakar +
-    //     totalHargaAyamGeprek +
-    //     totalHargaAyamGoreng +
-    //     totalHargaAyamKalasan +
-    //     totalHargaAyamRicarica
-    // );
+    InsertStruk({
+      variables: {
+        menu: ayamBakar.toString(),
+        satuan: hargaAyamBakar.toString(),
+        quantity: countAyamBakar.toString(),
+        total: totalHargaAyamBakar.toString(),
+        sub_total: totalHargaMenu.toString(),
+        uang_bayar: dataBayar.toString(),
+        kembalian: dataKembalian.toString(),
+      },
+    });
+    console.log("sub total harga belanjaan cust " + totalHargaMenu);
+    console.log("jumlah uang cust " + dataBayar);
+    console.log("jumlah kembalian cust " + dataKembalian);
+    console.log("makanan yang dipesan ", ayamBakar.toString());
+    console.log("harga barang satuan  ", hargaAyamBakar.toString());
+    console.log("banyaknya barang ", countAyamBakar);
+    console.log("total harga barang ", totalHargaAyamBakar);
   };
 
   return (

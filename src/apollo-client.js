@@ -1,5 +1,5 @@
 import { ApolloClient, HttpLink, InMemoryCache, split } from "@apollo/client";
-import { GrapQLWsLink } from "@apollo/client/link/subscriptions";
+import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
 import { getMainDefinition } from "@apollo/client/utilities";
 
@@ -11,7 +11,7 @@ const httpLink = new HttpLink({
   },
 });
 
-const wsLink = new GrapQLWsLink(
+const wsLink = new GraphQLWsLink(
   createClient({
     url: "https://smiling-lark-36.hasura.app/v1/graphql",
     connectionParams: {

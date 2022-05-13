@@ -2,7 +2,8 @@ import React from "react";
 
 import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 
-const borderColor = "#3778C2";
+const borderColor = "#383838";
+
 const styles = StyleSheet.create({
   page: {
     backgroundColor: "#fff",
@@ -34,8 +35,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flexDirection: "row",
-    borderBottomColor: "#3778C2",
-    backgroundColor: "#3778C2",
+    borderBottomColor: "#383838",
+    backgroundColor: "#383838",
     color: "#fff",
     borderBottomWidth: 1,
     alignItems: "center",
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
 const stylesItem = StyleSheet.create({
   row: {
     flexDirection: "row",
-    borderBottomColor: "#3778C2",
+    borderBottomColor: "#383838",
     borderBottomWidth: 1,
     alignItems: "center",
     height: 24,
@@ -103,6 +104,7 @@ const stylesItem = StyleSheet.create({
     borderRightColor: borderColor,
     textAlign: "left",
     paddingRight: 8,
+    fontWeight: 700,
   },
   subtotal: {
     width: "15%",
