@@ -120,6 +120,10 @@ function Home(props) {
     refetchQueries: [getStruk],
   });
 
+  useEffect(() => {
+    if (loading) return window.location.reload();
+  });
+
   const handelAirmineral = () => {
     // const menuAirmineral = menuMinuman.find((e) => e.id === 2);
     const minumanAirmineral = "Air Mineral";
@@ -270,10 +274,50 @@ function Home(props) {
   const saveData = () => {
     InsertStruk({
       variables: {
-        menu: ayamBakar.toString(),
-        satuan: hargaAyamBakar.toString(),
-        quantity: countAyamBakar.toString(),
-        total: totalHargaAyamBakar.toString(),
+        menu:
+          `${ayamBakar.toString()},` +
+          `${ayamGeprek.toString()}` +
+          `,${AyamRicarica.toString()}` +
+          `,${ayamGoreng.toString()}` +
+          `,${ayamKalasan.toString()}` +
+          `,${airMineral.toString()}` +
+          `,${esJeruk.toString()}` +
+          `,${esTehmanis.toString()}` +
+          `,${tehHangat.toString()}` +
+          `,${jusMangga.toString()}`,
+        satuan:
+          `${hargaAyamBakar.toString()},` +
+          `${hargaAyamGeprek.toString()},` +
+          `${hargaAyamRicarica.toString()},` +
+          `${hargaAyamGoreng.toString()},` +
+          `${hargaAyamKalasan.toString()},` +
+          `${hargaAirmineral.toString()},` +
+          `${hargaEsjeruk.toString()},` +
+          `${hargaEstehmanis.toString()},` +
+          `${hargaTehhangat.toString()},` +
+          hargaJusmangga.toString(),
+        quantity:
+          `${countAyamBakar.toString()},` +
+          `${countAyamGeprek.toString()},` +
+          `${countAyamRicarica.toString()},` +
+          `${countAyamGoreng.toString()},` +
+          `${countAyamKalasan.toString()},` +
+          `${countAirmineral.toString()},` +
+          `${countEsjeruk.toString()},` +
+          `${countEstehmanis.toString()},` +
+          `${countTeh.toString()},` +
+          countJusmangga.toString(),
+        total:
+          `${totalHargaAyamBakar.toString()},` +
+          `${totalHargaAyamGeprek.toString()},` +
+          `${totalHargaAyamRicarica.toString()},` +
+          `${totalHargaAyamGoreng.toString()},` +
+          `${totalHargaAyamKalasan.toString()},` +
+          `${totalHargaAirmineral.toString()},` +
+          `${totalHargaEsjeruk.toString()},` +
+          `${totalHargaEstehmanis.toString()},` +
+          `${totalHargaTehhangat.toString()},` +
+          totalHargaJusmangga.toString(),
         sub_total: totalHargaMenu.toString(),
         uang_bayar: dataBayar.toString(),
         kembalian: dataKembalian.toString(),
@@ -308,6 +352,7 @@ function Home(props) {
         <div className="row gx-5">
           <div className="col">
             <div className="p-3 border bg-danger bg-opacity-75">
+              
               MENU MAKANAN
             </div>
 
@@ -403,12 +448,12 @@ function Home(props) {
                     dataBayar={dataBayar}
                   />
                   <div className="row">
-                    <div class="col">
+                    <div className="col">
                       <Popup
                         modal
                         trigger={
                           <button>
-                            <div class="p-3 border bg-light">Bayar</div>
+                            <div className="p-3 border bg-light">Bayar</div>
                           </button>
                         }
                       >
@@ -430,13 +475,13 @@ function Home(props) {
                         )}
                       </Popup>
                     </div>
-                    <div class="col">
+                    <div className="col">
                       <Popup
                         modal
                         trigger={
                           <button>
                             <div
-                              class="p-3 border bg-light"
+                              className="p-3 border bg-light"
                               onClick={totalHarga}
                             >
                               Print
